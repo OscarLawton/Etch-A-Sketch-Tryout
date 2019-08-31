@@ -4,7 +4,7 @@
 		<title>Etch-A-Sketch</title>
 		<link rel="stylesheet" type="text/css" href="stylesheet/style.css">
 		<script type="text/javascript" src="JS/jquery-3.2.1.js"></script>
-		<script type="text/javascript" src="JS/myscript.js"></script>
+		
 	</head>
 	<body>
 		<div class="button-box">
@@ -17,7 +17,9 @@
 				<div id="pixel-button">
 					<sup>Resolution</sup>
 				</div>
-				
+                <div id="save-button">
+					<sup>save</sup>
+				</div>
 				<ul> 
 					<li>black</li> 
 					<li>red</li> 
@@ -32,7 +34,200 @@
 		</div>
 		<script>
 
-			createDivs();
+		
+            var array = [];
+function createDiv(x_pos,y_pos,z, pSize){
+    
+    var div = document.createElement("div");
+    div.setAttribute("class", "divs");
+    div.style.position = "absolute";
+    div.style.width = pSize+"px";
+    div.style.height = pSize+"px";
+    div.style.background = "white";
+    div.style.color = "white";
+    div.style.left = x_pos+'px';
+    div.style.top = y_pos+'px';
+    //div.innerHTML = z;
+    var mouse = false;
+    var over = false;
+  
+    array.push(div);
+    div.onmouseover = function(){
+        console.log("mouse over");
+        console.log(array);
+        if(red){
+
+             div.style.background = "red";
+             
+        }
+        else if(blue){
+
+            div.style.background = "blue";
+           
+        }else if(yellow){
+            
+            div.style.background = "yellow";
+        }
+        else if(white){
+
+            div.style.background = "white";
+
+        }
+        else {
+
+            div.style.background = "black";
+
+        }
+
+    }
+ 
+       
+        document.getElementById("box").appendChild(div);
+        console.log(array);
+    
+       
+
+
+
+}
+var x = 50;
+var y = 50;
+var z = 1;
+var value;
+function createDivs(){
+    array =  [];
+    for(i=0;i<30;i++){
+        for(j=0;j<30;j++){
+            createDiv(x,y,z,20)
+            z+=1;
+            x+=20;
+        }
+        y+=20;
+        x=50;
+    }
+
+}
+
+function createDivs2(gVaule){
+    array = [];
+    var x = 50;
+    var y = 50;
+    var pixelSize = 600/gVaule;
+    console.log(pixelSize)
+    console.log(gVaule)
+    for(i=0;i<gVaule;i++){
+        for(j=0;j<gVaule;j++){
+            createDiv(x,y,z,pixelSize)
+            z+=1;
+            x+=pixelSize;
+        }
+        y+=pixelSize;
+        x=50;
+    }
+
+}
+
+var black = true;
+var red = false;
+var blue = false;
+var yellow = false;
+var white = false;
+var clear = false;
+
+$(document).ready(function(){
+
+   
+    var gridValue = 20;
+    $("#clear-button").click(function(){
+        console.log("clear button pressed");
+      $(".divs").css( "background-color", "white" );
+    });
+    $("#pixel-button").click(function(){
+       
+       do{
+        gridValue = prompt("Enter a new length for the grid (no larger than 200):");
+    
+        
+        
+        }while(gridValue > 200)
+        createDivs2(gridValue)
+    });
+    $("#save-button").click(function(){
+        console.log("save button pressed");
+        fetch('/save',{ method: 'POST', body: {array: array} })
+    });
+
+    $("ul li:nth-child(1)").click(function(){
+        $(this).css( "background-color", "pink" );
+        $("ul li:nth-child(2)").css( "background-color", "white" );
+        $("ul li:nth-child(3)").css( "background-color", "white" );
+        $("ul li:nth-child(4)").css( "background-color", "white" );
+        $("ul li:nth-child(5)").css( "background-color", "white" );
+        black = true;
+        blue = false;
+        yellow = false;
+        red = false;
+        white = false;
+    });
+
+    $("ul li:nth-child(2)").click(function(){
+        $(this).css( "background-color", "pink" );
+       $("ul li:nth-child(1)").css( "background-color", "white" );
+        $("ul li:nth-child(3)").css( "background-color", "white" );
+        $("ul li:nth-child(4)").css( "background-color", "white" );
+        $("ul li:nth-child(5)").css( "background-color", "white" );
+
+        black = false;
+        blue = false;
+        yellow = false;
+        red = true;
+        white = false;
+    });
+    $("ul li:nth-child(3)").click(function(){
+        $(this).css( "background-color", "pink" );
+       $("ul li:nth-child(1)").css( "background-color", "white" );
+        $("ul li:nth-child(2)").css( "background-color", "white" );
+        $("ul li:nth-child(4)").css( "background-color", "white" );
+        $("ul li:nth-child(5)").css( "background-color", "white" );
+
+
+        black = false;
+        blue = true;
+        yellow = false;
+        red = false;
+        white = false;
+    });
+    $("ul li:nth-child(4)").click(function(){
+        $(this).css( "background-color", "pink" );
+        $("ul li:nth-child(1)").css( "background-color", "white" );
+        $("ul li:nth-child(2)").css( "background-color", "white" );
+        $("ul li:nth-child(3)").css( "background-color", "white" );
+        $("ul li:nth-child(5)").css( "background-color", "white" );
+
+        black = false;
+        blue = false;
+        yellow = true;
+        red = false;
+        white = false;
+    });
+    $("ul li:nth-child(5)").click(function(){
+        $(this).css( "background-color", "pink" );
+         $("ul li:nth-child(1)").css( "background-color", "white" );
+        $("ul li:nth-child(2)").css( "background-color", "white" );
+        $("ul li:nth-child(3)").css( "background-color", "white" );
+        $("ul li:nth-child(4)").css( "background-color", "white" );
+        black = false;
+        blue = false;
+        yellow = false;
+        red = false;
+        white = true;
+    });
+
+
+});
+
+ 
+createDivs();
 
 		</script>
 	</body>

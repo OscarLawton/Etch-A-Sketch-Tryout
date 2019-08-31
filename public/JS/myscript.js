@@ -11,7 +11,7 @@
     });*/
 
 
-
+var array = [];
 function createDiv(x_pos,y_pos,z, pSize){
     
     var div = document.createElement("div");
@@ -27,9 +27,10 @@ function createDiv(x_pos,y_pos,z, pSize){
     var mouse = false;
     var over = false;
   
-
+    array.push(div);
     div.onmouseover = function(){
         console.log("mouse over");
+        console.log(array);
         if(red){
 
              div.style.background = "red";
@@ -56,9 +57,9 @@ function createDiv(x_pos,y_pos,z, pSize){
 
     }
  
-
+       
         document.getElementById("box").appendChild(div);
-    
+        console.log(array);
     
        
 
@@ -127,6 +128,11 @@ $(document).ready(function(){
         }while(gridValue > 200)
         createDivs2(gridValue)
     });
+    $("#save-button").click(function(){
+        console.log("save button pressed");
+        
+    });
+
     $("ul li:nth-child(1)").click(function(){
         $(this).css( "background-color", "pink" );
         $("ul li:nth-child(2)").css( "background-color", "white" );

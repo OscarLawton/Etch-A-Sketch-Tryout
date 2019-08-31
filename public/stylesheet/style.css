@@ -57,6 +57,9 @@ body {
 	margin-left: auto;
 	margin-bottom: 0px;
 }
+
+
+
 #clear-button{
 	  
 	vertical-align: top;
@@ -110,3 +113,27 @@ body {
 	background-color: pink;
 }
 
+#save-button{
+	vertical-align: top;
+	display: block;
+	margin: 10px;
+	height:20px;
+	width: 50px;
+	text-anchor: all;
+	text-align: center;
+	background-color: white;
+	float:left;
+	border: 5px solid #eee;
+	font-size: medium;
+}
+
+
+#save-button:hover{
+	-webkit-box-shadow:0 0 20px pink; 
+	-moz-box-shadow: 0 0 20px pink;
+	box-shadow:0 0 20px pink;
+}
+
+#save-button:active{
+	background-color: pink;
+}
